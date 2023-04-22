@@ -1,0 +1,14 @@
+Node2 Node7 7
+Node9 Node6 6
+Node5 Node10 1
+Node3 Node8 10
+Node7 Node6 3
+Node6 Node2 2
+Node9 Node7 4
+Node9 Node7 7
+Node8 Node9 3
+Node5 Node9 4
+Node3 Node8 5
+Node8 Node7 5
+Node8 Node10 10
+Node2 Node4 2
