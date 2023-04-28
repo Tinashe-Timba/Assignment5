@@ -1,3 +1,4 @@
+package main;
 // Represents an entry in the priority queue for Dijkstra's algorithm.
 class Path implements Comparable<Path>
 {

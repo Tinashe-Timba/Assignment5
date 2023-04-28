@@ -1,3 +1,4 @@
+package main;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -42,7 +43,7 @@ public class Graph
     public int E=0 ;
     public int vCount=0;
     public int eCount=0;
-
+    public int pq_count=0;
     /**
      * Add a new edge to the graph.
      */
@@ -175,7 +176,8 @@ public class Graph
         
         int nodesSeen = 0;
         while( !pq.isEmpty( ) && nodesSeen < vertexMap.size( ) )
-        {
+        {   //cpq_count++;// prioty q counter 
+            pq_count+= (int)(Math.log(pq.size())/Math.log(2));
             Path vrec = pq.remove( );
             Vertex v = vrec.dest;
             if( v.scratch != 0 )  // already processed v
@@ -184,12 +186,14 @@ public class Graph
             v.scratch = 1;
             nodesSeen++;
             vCount++;
+            V++;
 
             for( Edge e : v.adj )
             {
                 Vertex w = e.dest;
                 double cvw = e.cost;
                 eCount++;
+                E++;
                 
                 if( cvw < 0 )
                     throw new GraphException( "Graph has negative edges" );
@@ -199,6 +203,8 @@ public class Graph
                     w.dist = v.dist +cvw;
                     w.prev = v;
                     pq.add( new Path( w, w.dist ) );
+                    pq_count+= (int)(Math.log(pq.size())/Math.log(2));
+                
                 }
             }
         }
@@ -265,6 +271,7 @@ public class Graph
             for( Edge e : v.adj )
                 e.dest.scratch++;
                 eCount++;
+                E++;
             
           // Enqueue vertices of indegree zero
         for( Vertex v : vertexSet )
@@ -276,6 +283,7 @@ public class Graph
         for( iterations = 0; !q.isEmpty( ); iterations++ )
         {
             Vertex v = q.remove( );
+            V++;
 
             for( Edge e : v.adj )
             {
@@ -352,7 +360,7 @@ public class Graph
         Graph g = new Graph( );
         try
         {   	
-            FileReader fin = new FileReader("Graph1.txt");
+            FileReader fin = new FileReader("data1.txt");
             Scanner graphFile = new Scanner( fin );
 
             // Read the edges and insert
@@ -387,5 +395,59 @@ public class Graph
          Scanner in = new Scanner( System.in );
          while( processRequest( in, g ) )
              ;
+    }
+}
+
+class Edge
+{
+    public Vertex     dest;   // Second vertex in Edge
+    public double     cost;   // Edge cost
+    
+    public Edge( Vertex d, double c )
+    {
+        dest = d;
+        cost = c;
+    }
+}
+
+
+
+// Represents a vertex in the graph.
+class Vertex
+{
+    public String     name;   // Vertex name
+    public List<Edge> adj;    // Adjacent vertices
+    public double     dist;   // Cost
+    public Vertex     prev;   // Previous vertex on shortest path
+    public int        scratch;// Extra variable used in algorithm
+
+    public Vertex( String nm )
+      { name = nm; adj = new LinkedList<Edge>( ); reset( ); }
+
+    public void reset( )
+    //  { dist = Graph.INFINITY; prev = null; pos = null; scratch = 0; }    
+    { dist = Graph.INFINITY; prev = null; scratch = 0; }
+      
+   // public PairingHeap.Position<Path> pos;  // Used for dijkstra2 (Chapter 23)
+}
+
+
+
+class Path implements Comparable<Path>
+{
+    public Vertex     dest;   // w
+    public double     cost;   // d(w)
+    
+    public Path( Vertex d, double c )
+    {
+        dest = d;
+        cost = c;
+    }
+    
+    public int compareTo( Path rhs )
+    {
+        double otherCost = rhs.cost;
+        
+        return cost < otherCost ? -1 : cost > otherCost ? 1 : 0;
     }
 }
