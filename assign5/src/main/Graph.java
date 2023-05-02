@@ -1,3 +1,24 @@
+/** 
+ * The Graph class provides methods to evaluate shortest paths.
+ * CONSTRUCTION: with no parameters.
+ * PUBLIC OPERATIONS****
+ * void addEdge( String v, String w, double cvw )
+ * void printPath( String w ) --> Print path after alg is run
+ * void unweighted( String s ) --> Single-source unweighted
+ * void dijkstra( String s ) --> Single-source weighted
+ * void negative( String s ) --> Single-source negative weighted
+ * void acyclic( String s ) --> Single-source acyclic
+ * ERRORS***************
+ * Some error checking is performed to make sure graph is ok,
+ * and to make sure graph satisfies properties needed by each
+ * algorithm. Exceptions are thrown if errors are detected.
+*/
+
+
+
+
+
+
 package main;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -177,7 +198,7 @@ public class Graph
         int nodesSeen = 0;
         while( !pq.isEmpty( ) && nodesSeen < vertexMap.size( ) )
         {   //cpq_count++;// prioty q counter 
-            pq_count+= (int)(Math.log(pq.size())/Math.log(2));
+            if (pq.size()!=0) pq_count+= (int)(Math.log(pq.size())/Math.log(2));
             Path vrec = pq.remove( );
             Vertex v = vrec.dest;
             if( v.scratch != 0 )  // already processed v
@@ -203,7 +224,7 @@ public class Graph
                     w.dist = v.dist +cvw;
                     w.prev = v;
                     pq.add( new Path( w, w.dist ) );
-                    pq_count+= (int)(Math.log(pq.size())/Math.log(2));
+                    if (pq.size()!=0) pq_count+= (int)(Math.log(pq.size())/Math.log(2));
                 
                 }
             }
@@ -397,12 +418,20 @@ public class Graph
              ;
     }
 }
+/**
+ * the Edge class
+ */
 
 class Edge
 {
     public Vertex     dest;   // Second vertex in Edge
     public double     cost;   // Edge cost
     
+    /**
+     * edge constructor
+     * @param d {Vertex} d - vertex object for the destination
+     * @param c {double} c - cost of the operation
+     */
     public Edge( Vertex d, double c )
     {
         dest = d;
@@ -411,10 +440,13 @@ class Edge
 }
 
 
-
+/**
+ * The vertex class.
+*/
 // Represents a vertex in the graph.
 class Vertex
 {
+
     public String     name;   // Vertex name
     public List<Edge> adj;    // Adjacent vertices
     public double     dist;   // Cost
@@ -431,7 +463,9 @@ class Vertex
    // public PairingHeap.Position<Path> pos;  // Used for dijkstra2 (Chapter 23)
 }
 
-
+/**
+ * Path class 
+ */
 
 class Path implements Comparable<Path>
 {

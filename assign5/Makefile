@@ -17,3 +17,5 @@ clean:
 
 run: $(CLASS_FILES)
 	java -cp $(BINDIR) main/GraphExperiment
+javadoc:
+	javadoc -d docs -cp bin- sourcepath src/main
