@@ -7,7 +7,7 @@ $(BINDIR)/main/%.class:$(SRCDIR)/%.java
 	$(JAVAC) -d $(BINDIR)/ -cp $(BINDIR) $<
 
 
-CLASSES= GraphException.class Graph.class graphgen.class GraphExperiment.class
+CLASSES= GraphException.class Graph.class Graphgen.class GraphExperiment.class
 CLASS_FILES=$(CLASSES:%.class=$(BINDIR)/main/%.class)
 
 default: $(CLASS_FILES)
@@ -18,4 +18,4 @@ clean:
 run: $(CLASS_FILES)
 	java -cp $(BINDIR) main/GraphExperiment
 javadoc:
-	javadoc -d docs -cp bin- sourcepath src/main
+	javadoc -d docs -cp $(BINDIR):$(LIBDIR)/* -sourcepath src/ main

@@ -142,6 +142,7 @@ public class Graph
             this.eCount=0;
             this.V=0;
             this.E=0;
+            this.pq_count=0;
     }
 
     /**
@@ -198,7 +199,7 @@ public class Graph
         int nodesSeen = 0;
         while( !pq.isEmpty( ) && nodesSeen < vertexMap.size( ) )
         {   //cpq_count++;// prioty q counter 
-            if (pq.size()!=0) pq_count+= (int)(Math.log(pq.size())/Math.log(2));
+            if (pq.size()!=0) pq_count+= (int)((Math.log(pq.size()))/Math.log(2));
             Path vrec = pq.remove( );
             Vertex v = vrec.dest;
             if( v.scratch != 0 )  // already processed v
@@ -224,7 +225,7 @@ public class Graph
                     w.dist = v.dist +cvw;
                     w.prev = v;
                     pq.add( new Path( w, w.dist ) );
-                    if (pq.size()!=0) pq_count+= (int)(Math.log(pq.size())/Math.log(2));
+                    if (pq.size()!=0) pq_count+= (int)((Math.log(pq.size()))/Math.log(2));
                 
                 }
             }

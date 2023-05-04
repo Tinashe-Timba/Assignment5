@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
-public class graphgen {
+public class Graphgen {
     private int Vertices;
     private int weightlim;
     private int Edges;
@@ -27,15 +27,15 @@ public class graphgen {
  */
 
     // initializes the number of vertices, edges, and weight limits
-    public graphgen(int Vertices, int weightlim, int Edges) {
+    public Graphgen(int Vertices, int weightlim, int Edges) {
         this.Vertices = Vertices;
         this.weightlim = weightlim;
         this.Edges = Edges;
         this.random = new Random();
     }
 /**
- * 
- * @param filename
+ * Generates text file with random edges and weights
+ * @param filename file for text to be stored
  * @throws IOException
  */
     public void generateData(String filename) throws IOException {
@@ -104,7 +104,7 @@ public class graphgen {
         String dataset = V + " " + E + " " + vCount + " " + eCount+" "+pq_count+" "+Elogv+" "+operations;
         String line = dataset + "\n";
         try {
-            FileWriter writer = new FileWriter("Data5.txt", true); // append to file
+            FileWriter writer = new FileWriter("data/COUNTS/Data2.txt", true); // append to file
             writer.write(line);
             writer.close();
         } catch (IOException e) {
