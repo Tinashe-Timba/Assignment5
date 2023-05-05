@@ -104,7 +104,7 @@ public class Graphgen {
         String dataset = V + " " + E + " " + vCount + " " + eCount+" "+pq_count+" "+Elogv+" "+operations;
         String line = dataset + "\n";
         try {
-            FileWriter writer = new FileWriter("data/COUNTS/Data1.txt", true); // append to file
+            FileWriter writer = new FileWriter("data/COUNTS/Data3.txt", true); // append to file
             writer.write(line);
             writer.close();
         } catch (IOException e) {
