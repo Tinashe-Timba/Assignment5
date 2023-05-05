@@ -33,7 +33,7 @@ public class GraphExperiment {
         Graphgen generator = new Graphgen(EV[i][0], 20, EV[i][1]);
         String source1=null;// a varaible to hold the soruce of the data
         try {
-            generator.generateData("data/DATA2/data_"+EV[i][0]+"_"+EV[i][1]+".txt");
+            generator.generateData("data/DATA1/data_"+EV[i][0]+"_"+EV[i][1]+".txt");
         } catch (IOException e) {
             System.out.println("Error writing to file: " + e.getMessage());
         }
@@ -42,7 +42,7 @@ public class GraphExperiment {
             Graph g = new Graph( );
             try
             {   	
-                FileReader fin = new FileReader("data/DATA2/data_"+EV[i][0]+"_"+EV[i][1]+".txt");
+                FileReader fin = new FileReader("data/DATA1/data_"+EV[i][0]+"_"+EV[i][1]+".txt");
                 Scanner graphFile = new Scanner( fin );
     
                 // Read the edges and insert

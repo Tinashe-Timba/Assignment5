@@ -14,32 +14,37 @@ Ecount = data[:, 3]
 PQ_count = data[:, 4]
 ELOGV = data[:, 5]
 Operations = data[:, 6]
+cor= np.corrcoef(ELOGV,Operations)[0,1]
+print("The correlation coeefiecient is ",cor)
+fig,cx=plt.subplots()
+cx.plot(Operations,ELOGV,"o")
+cx.set_title("Correlation between ELOGV and OPERATIONS")
 
 # Create a figure and set the title
 fig, ax = plt.subplots()
 ax.set_title('ELOGV AND OPERATIONS')
 fig, bx =plt.subplots()
 
-bx.set_title("Relation between E and Operations")
+bx.set_title("Relation between E and ELOGV")
 
 fig, vx =plt.subplots()
-vx.set_title("Relation between V and Operations")
+vx.set_title("Relation between V and ELOGV")
 
 fig, mx =plt.subplots()
-mx.set_title("Relation between PQ_count and Operations")
+mx.set_title("Relation between PQ_count and ELOGV")
 
 # Plot each column of data
 
 ax.plot(ELOGV, label='ELOGV')
 ax.plot(Operations, label='Operations')
 
-bx.plot(ELOGV, label='Operations')
+bx.plot(ELOGV, label='ELOGV')
 bx.plot(E, label='Edges')
 
-vx.plot(ELOGV, label='Operations')
+vx.plot(ELOGV, label='ELOGV')
 vx.plot(V, label='Vertices')
 
-mx.plot(ELOGV, label='Operations')
+mx.plot(ELOGV, label='ELOGV')
 mx.plot(PQ_count, label='Priority Queue')
 
 
@@ -60,6 +65,10 @@ vx.set_ylabel('MAGNITUDE')
 mx.legend()
 mx.set_xlabel('EXPERIMENT NUMBER')
 mx.set_ylabel('MAGNITUDE')
+
+cx.legend()
+cx.set_xlabel('OPERATIONS')
+cx.set_ylabel('ELOGV')
 
 
 # Show the plot
